@@ -23,7 +23,7 @@ app.use(express.static('website'));
 
 
 // Setup Server
-const port=3030;
+const port=8000;
 const server=app.listen(port,listening);
 function listening(){
     console.log(`runing on port ${port}`);
@@ -33,51 +33,20 @@ app.get('/all',sendData);
 function sendData(request,response){
     response.send(projectData);
 };
-app.post('/add',callBack);
-function callBack(req,res){
-    res.send("Post recieved");
-};
-
 const data=[];
 app.post('weather',addWeather);
 function addWeather(req,res){
     data.push(req.body);
 };
-
-const weatherData=[];
-app.get('/all',getData)
-function getData(req,res)
+app.post('/addWeather',addWeatherData);
+function addWeatherData(req,res)
 {
-    res.send(weatherData)
-    console.log(weatherData)
-}
-app.post('/addWeather',addWeather);
-function addWeather(req,res)
-{
-    newEntry={
-        temp:request.body.temp,
-        date:request.body.newDate,
-        userResponse:request.body.userResponse
-        
+    projectData={
+        temp:req.body.temp,
+        newDate:req.body.newDate,
+        userresponse:req.body.userresponse   
     }
-    weatherData.push(newEntry)
-    res.send(weatherData)
-    console.log(weatherData)
+    // projectData.push(newEntry)
+    res.send(projectData)
+    console.log(projectData)
 }
-
-// weatherdata=[];
-// app.post('/add',addData);
-// function addData(request,response)
-// {
-//     newEntry={
-//         temperature:request.body.temperature,
-//         date:request.body.date,
-//         userResponse:request.body.userResponse
-//     }
-//     weatherdata.push(newEntry)
-//     response.send(weatherdata)
-//     console.log(newEntry)
-//     // projectData.push(request.body.temperature);
-//     // projectData.push(request.body.date);
-//     // projectData.push(request.body.response);
-// }
