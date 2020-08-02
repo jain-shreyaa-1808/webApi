@@ -33,18 +33,13 @@ app.get('/all',sendData);
 function sendData(request,response){
     response.send(projectData);
 };
-const data=[];
-app.post('weather',addWeather);
-function addWeather(req,res){
-    data.push(req.body);
-};
 app.post('/addWeather',addWeatherData);
 function addWeatherData(req,res)
 {
     projectData={
         temp:req.body.temp,
         newDate:req.body.newDate,
-        userresponse:req.body.userresponse   
+        userContent:req.body.userContent  
     }
     // projectData.push(newEntry)
     res.send(projectData)

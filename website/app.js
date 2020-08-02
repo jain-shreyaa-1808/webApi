@@ -5,10 +5,10 @@ let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 let baseURL='http://api.openweathermap.org/data/2.5/weather?q=';
 let apiKey='&APPID=1071563b9edeb59f74273a0c5acf4626';
-const getWeather=async (url)=>{
-    const res= await fetch(url);
+const getWeatherData=async (url)=>{
+    const response= await fetch(url);
     try{
-        const data=await res.json();
+        const data=await response.json();
         console.log(data)
         return data;
     }
@@ -23,8 +23,8 @@ function action(e){
     const zipCode=document.getElementById('zip').value;
     weatherDemo(baseURL,zipCode,apiKey)
     .then(function(data){
-        const userresponse=document.querySelector('.myInput').value;
-        makePost('/addWeather',{temp:data.main.temp, newDate:newDate, userresponse:userresponse});
+        const userContent=document.querySelector('.myInput').value;
+        makePost('/addWeather',{temp:data.main.temp, newDate:newDate, userContent:userContent});
         updateUI();
     })
 }
@@ -65,7 +65,7 @@ const updateUI= async()=>{
             console.log(allData);
             document.getElementById("temp").innerHTML=allData.temp;
             document.getElementById("date").innerHTML=allData.newDate;
-            document.getElementById("content").innerHTML=allData.userresponse;
+            document.getElementById("content").innerHTML=allData.userContent;
         }
         catch(error){
             console.log("error",error);
