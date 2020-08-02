@@ -21,8 +21,8 @@ function action(e){
     weatherDemo(baseURL,zipCode,apiKey)
     .then(function(data){
         console.log(data)
-        makePost('/add',{temperature:30, date:21, userResponse:'great'})
-    //     updateUI()
+        makePost('/addWeather',{temp:data.temp, date:data.date, userResponse:'great'})
+        updateUI()
     })
 }
 const makePost= async(url='',data={})=>{
@@ -60,7 +60,7 @@ const updateUI= async()=>{
         try{
             const allData=await request.json();
             console.log(allData);
-            document.getElementById("temp").innerHTML=allData[0].temperature;
+            document.getElementById("temp").innerHTML=allData[0].temp;
             document.getElementById("date").innerHTML=allData[0].date;
             document.getElementById("content").innerHTML=allData[0].userResponse;
         }
